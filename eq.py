@@ -7,6 +7,8 @@ offset = 4 + random + 1
 location = 1 + origin + offset
 origin = 3 + 5
 random = 2
+
+
 """
 
 
@@ -32,6 +34,9 @@ class Equation:
 
     subeq_idx = 0
     for l in eq_str.splitlines():
+      if len(l.strip()) == 0:
+        continue
+
       self.sub_eqs.append(l)
       lhs_var, rhs = (x.strip() for x in l.split('='))
 
@@ -76,4 +81,4 @@ class Equation:
 
 
 equation = Equation(eq_string)
-print equation.solve()
+equation.solve()
