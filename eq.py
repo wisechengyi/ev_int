@@ -1,5 +1,5 @@
 import re
-
+import sys
 import numpy as np
 
 eq_string = """\
@@ -76,9 +76,14 @@ class Equation:
     co = self.construct_coefficient_matrix()
     solution = np.linalg.solve(co, self.values)
     for i, var in enumerate(self.coefficients):
-      print var, solution[i]
+      print var, int(solution[i])
+
     return solution
 
 
-equation = Equation(eq_string)
-equation.solve()
+if __name__ == '__main__':
+  filename = sys.argv[1]
+  with open(filename, 'r') as f:
+    eq_str = f.read()
+  equation = Equation(eq_str)
+  equation.solve()
