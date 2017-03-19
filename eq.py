@@ -1,5 +1,6 @@
 import re
 import sys
+
 import numpy as np
 
 eq_string = """\
@@ -40,11 +41,10 @@ class Equation:
       self.sub_eqs.append(l)
       lhs_var, rhs = (x.strip() for x in l.split('='))
 
-      # LHS
+      # LHS. Record variable coffiecient as 1
       self.add_variable_coefficient(lhs_var, 1, subeq_idx)
 
-      # RHS
-
+      # RHS. Add up the values, or record variable coefficient as -1
       elements = list(x for x in re.split(r'[ =\+]', rhs) if len(x) > 0)
       for elem in elements:
         # check for empty string
@@ -61,6 +61,10 @@ class Equation:
       subeq_idx += 1
 
   def construct_coefficient_matrix(self):
+    """
+    Construct the coefficient matrix based on self.coefficients parsed earlier.
+    :return:
+    """
     total_vars = len(self.coefficients)
     co_matrix = np.zeros((total_vars, total_vars))
     var_count = 0
