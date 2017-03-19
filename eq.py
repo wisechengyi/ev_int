@@ -89,5 +89,5 @@ if __name__ == '__main__':
   filename = sys.argv[1]
   with open(filename, 'r') as f:
     eq_str = f.read()
-  equation = Equation(eq_str)
-  equation.solve()
+    equation = Equation(eq_str)
+    equation.solve()
